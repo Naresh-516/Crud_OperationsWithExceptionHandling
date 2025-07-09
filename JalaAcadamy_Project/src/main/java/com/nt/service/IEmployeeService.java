@@ -16,6 +16,6 @@ public interface IEmployeeService {
 	
 	public Page<Employee> getEmployeesWithPagination(int page,int size);
 	public Page<Employee> getEmployeesWithPageandSort(int page,int size,String sortby,String direction);
-	Employee updateEmployee(int id,Long mobile,String email);
+	Employee updateEmployee(int id, String email, Long number);
 	
 }

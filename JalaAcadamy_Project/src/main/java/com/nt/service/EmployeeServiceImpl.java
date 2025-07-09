@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.nt.Document.Employee;
+import com.nt.Document.EmployeeCreateDTO;
 import com.nt.exception.UserNotFoundException;
 import com.nt.repo.EmployeeRepo;
 
@@ -68,6 +69,19 @@ public class EmployeeServiceImpl implements IEmployeeService{
 	    emp.setEmail(email);
 	    emp.setMobileNumber(number);
 	    return repo.save(emp);
+	}
+	public Employee convertDtoToEntity(EmployeeCreateDTO dto) {
+	    Employee emp = new Employee();
+	    emp.setName(dto.getName());
+	    emp.setEmail(dto.getEmail());
+	    emp.setMobileNumber(dto.getMobileNumber());
+	    emp.setDob(dto.getDob());
+	    emp.setGender(dto.getGender());
+	    emp.setAddress(dto.getAddress());
+	    emp.setCountry(dto.getCountry());
+	    emp.setCity(dto.getCity());
+	    emp.setSkills(dto.getSkills());
+	    return emp;
 	}
 
 

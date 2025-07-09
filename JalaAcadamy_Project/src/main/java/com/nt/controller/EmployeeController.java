@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nt.Document.Employee;
+import com.nt.Document.EmployeeCreateDTO;
+import com.nt.service.EmployeeServiceImpl;
 import com.nt.service.IEmployeeService;
 
 import jakarta.validation.Valid;
@@ -26,11 +28,12 @@ import jakarta.validation.Valid;
 public class EmployeeController {
 
     @Autowired
-    private IEmployeeService serv;
+    private EmployeeServiceImpl serv;
 
     @PostMapping("/addemployee")
-    public ResponseEntity<Employee> addEmployee(@Valid @RequestBody Employee emp) {
-        Employee savedEmp = serv.saveEmployee(emp);
+    public ResponseEntity<Employee> addEmployee(@Valid @RequestBody EmployeeCreateDTO  emp) {
+    	Employee emp01=serv.convertDtoToEntity(emp);
+        Employee savedEmp = serv.saveEmployee(emp01);
         return new ResponseEntity<>(savedEmp, HttpStatus.CREATED);
     }
 
@@ -39,10 +42,10 @@ public class EmployeeController {
         Employee emp = serv.getEmployee(id);
         return new ResponseEntity<>(emp, HttpStatus.OK);
     }
-    @PutMapping("/updateEmployeeinfo")
-    public ResponseEntity<Employee> updateEmployeeInfo(@RequestBody Employee emp){
+    @PutMapping("/updateEmployee")
+    public ResponseEntity<Employee> updateEmployeeInfo(@RequestParam int id,@RequestParam String email,@RequestParam Long mobile){
     	
-    	return new ResponseEntity<Employee>(serv.updateEmployee(emp),HttpStatus.OK);
+    	return new ResponseEntity<Employee>(serv.updateEmployee(id,email,mobile),HttpStatus.OK);
     }
 
     @DeleteMapping("/employee/delete/{id}")
