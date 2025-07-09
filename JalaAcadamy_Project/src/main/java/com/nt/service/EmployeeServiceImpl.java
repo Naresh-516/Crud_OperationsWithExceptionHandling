@@ -62,12 +62,11 @@ public class EmployeeServiceImpl implements IEmployeeService{
 	}
 
 	@Override
-	public Employee updateEmployee(int id, String address, String city, String country) {
+	public Employee updateEmployee(int id,String email,Long number) {
 	    Employee emp = repo.findById(id)
 	            .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
-	    emp.setAddress(address);
-	    emp.setCity(city);
-	    emp.setCountry(country);
+	    emp.setEmail(email);
+	    emp.setMobileNumber(number);
 	    return repo.save(emp);
 	}
 

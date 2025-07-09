@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nt.Document.Employee;
@@ -39,9 +40,9 @@ public class EmployeeController {
         return new ResponseEntity<>(emp, HttpStatus.OK);
     }
     @PutMapping("/updateEmployeeinfo")
-    public ResponseEntity<Employee> updateEmployeeInfo(@RequestParam int id,@RequestParam String address,@RequestParam String city,@RequestParam String country){
+    public ResponseEntity<Employee> updateEmployeeInfo(@RequestBody Employee emp){
     	
-    	return new ResponseEntity<Employee>(serv.updateEmployee(id, address, city, country),HttpStatus.OK);
+    	return new ResponseEntity<Employee>(serv.updateEmployee(emp),HttpStatus.OK);
     }
 
     @DeleteMapping("/employee/delete/{id}")
